@@ -1,0 +1,20 @@
+<div class="">
+    <h3 *ngIf="firstTime">Hello there. Haven't seen you here before. What's your name?</h3>
+
+    <div>
+        <input [(ngModel)]="inputValue" type="text" placeholder="Enter lastname">
+        <button *ngIf="firstTime" (click)="addName(inputValue)">Add Lastname</button>
+        <button ngDefaultControl [(ngModel)]="inputValue" (click)="addName(inputValue)">Change lastname</button>
+    </div>
+
+
+    <p *ngIf="gotName">Alright Mr.{{lastname}}, what can I do you for?</p>
+
+    <app-select-beverage (sendBeverage)="handleBeverage($event)" *ngIf="gotName"></app-select-beverage>
+
+    <p *ngIf="gotBeverage">One {{beverage}}, coming right up for you <span>{{lastname}}</span>!</p>
+
+    <app-the-usual *ngIf="noBeverage" [beverageValue]="storedBeverage"
+        (sendStoredBeverage)="gotStoredBeverage($event)">
+    </app-the-usual>
+</div>
